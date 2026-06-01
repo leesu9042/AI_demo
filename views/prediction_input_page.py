@@ -6,7 +6,7 @@ import streamlit as st
 from services.prediction_service import prepare_prediction_input
 
 
-def parse_excel_paste_text(paste_text):
+def parse_tsv_to_df(paste_text):
     if not paste_text or not paste_text.strip():
         return None, ["붙여넣은 데이터가 없습니다."]
 
@@ -31,19 +31,6 @@ def parse_excel_paste_text(paste_text):
     return raw_input, []
 
 
-def validate_required_columns(raw_input, schema):
-    required_cols = schema.get("required_input_cols", [])
-
-    missing_cols = [
-        col for col in required_cols
-        if col not in raw_input
-    ]
-
-    if missing_cols:
-        return [f"필수 컬럼이 없습니다: {missing_cols}"]
-
-    return []
-
 
 def show_prediction_input_page():
     st.title("예측 데이터 입력")
@@ -63,7 +50,7 @@ def show_prediction_input_page():
         st.error("예측 입력 스키마가 없습니다.")
         return
 
-    required_cols = schema.get("required_input_cols", [])
+    required_cols = schema.get("raw_required_cols", [])
 
     st.caption("엑셀에서 컬럼명(header)과 데이터 1행을 함께 복사해서 붙여넣어주세요.")
     st.dataframe(
@@ -80,9 +67,14 @@ def show_prediction_input_page():
     raw_input = None
     errors = []
 
+
+# TODO:
+# - 입력 데이터 df로 변경로직
+# - 검증 버튼 누르면 검증 후 상태값 리턴
+
     # 빈칸이 아니면 if문 실행(붙여넣은 데이터가 있으면 실행) 
     if paste_text.strip():
-        raw_input, parse_errors = parse_excel_paste_text(paste_text)
+        raw_input, parse_errors = parse_tsv_to_df(paste_text)
         errors.extend(parse_errors)
 
         if raw_input is not None:
@@ -94,7 +86,10 @@ def show_prediction_input_page():
         "model_input_df": None,
     }
 
-    # 입력데이터 에러 검
+
+
+
+    # 입력데이터 에러 검증
     if raw_input is not None and not errors:
         result = prepare_prediction_input(raw_input, schema)
 

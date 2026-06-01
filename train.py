@@ -88,9 +88,10 @@ def train_model(df, target_col=None, test_size=0.2, random_state=42):
     )
 
     # 4. 컬럼 구분
+    PREPROCESS_REQUIRED_COLS = ["EQUIP_NAME", "PART_NAME"]
     categorical_cols = ["PART_GROUP"]
     numeric_cols = [c for c in X.columns if c not in categorical_cols]
-    required_input_cols = ["EQUIP_NAME", "PART_NAME"] + numeric_cols
+    raw_required_cols = PREPROCESS_REQUIRED_COLS + numeric_cols
 
 
 
@@ -168,25 +169,21 @@ def train_model(df, target_col=None, test_size=0.2, random_state=42):
     
     # 예측 화면 검증용
     "predict_input_schema":  {
-        "required_input_cols": required_input_cols,
 
-
-        "raw_categorical_cols": {
-            "EQUIP_NAME": ALLOWED_EQUIP_NAMES,
-            "PART_NAME": list(PRODUCT_GROUP_MAPPING.keys()),
-        },
+        "raw_required_cols": raw_required_cols,
 
         "allowed_values": {
             "EQUIP_NAME": ALLOWED_EQUIP_NAMES,
             "PART_NAME": list(PRODUCT_GROUP_MAPPING.keys()),
         },
+        
         "mappings": {
             "PART_NAME": {
                 "target_col": "PART_GROUP",
                 "values": PRODUCT_GROUP_MAPPING,
             }
         },
-        "model_input_cols": X.columns.tolist(),
+        "pipeline_input_cols": X.columns.tolist(),
         "categorical_cols": categorical_cols,
         "numeric_input_cols": numeric_cols,
     }
