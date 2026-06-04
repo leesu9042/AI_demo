@@ -1,0 +1,165 @@
+{
+    "model_name": "rf_model test1",
+    "description": "dcs : rf_model test1",
+    "metrics": {
+        "accuracy": 0.9912445278298937,
+        "precision": 0.5,
+        "recall": 0.35714285714285715,
+        "f1": 0.4166666666666667,
+        "roc_auc": 0.8922712933753943
+    },
+    "feature_names": [
+        "PART_GROUP_CN7",
+        "PART_GROUP_RG3",
+        "Injection_Time",
+        "Filling_Time",
+        "Plasticizing_Time",
+        "Cycle_Time",
+        "Clamp_Close_Time",
+        "Cushion_Position",
+        "Switch_Over_Position",
+        "Plasticizing_Position",
+        "Clamp_Open_Position",
+        "Max_Injection_Speed",
+        "Max_Screw_RPM",
+        "Average_Screw_RPM",
+        "Max_Injection_Pressure",
+        "Max_Switch_Over_Pressure",
+        "Max_Back_Pressure",
+        "Average_Back_Pressure",
+        "Barrel_Temperature_1",
+        "Barrel_Temperature_2",
+        "Barrel_Temperature_3",
+        "Barrel_Temperature_4",
+        "Barrel_Temperature_5",
+        "Barrel_Temperature_6",
+        "Hopper_Temperature",
+        "Mold_Temperature_3",
+        "Mold_Temperature_4"
+    ],
+    "predict_input_schema": {
+        "required_input_cols": [
+            "EQUIP_NAME",
+            "PART_NAME",
+            "Injection_Time",
+            "Filling_Time",
+            "Plasticizing_Time",
+            "Cycle_Time",
+            "Clamp_Close_Time",
+            "Cushion_Position",
+            "Switch_Over_Position",
+            "Plasticizing_Position",
+            "Clamp_Open_Position",
+            "Max_Injection_Speed",
+            "Max_Screw_RPM",
+            "Average_Screw_RPM",
+            "Max_Injection_Pressure",
+            "Max_Switch_Over_Pressure",
+            "Max_Back_Pressure",
+            "Average_Back_Pressure",
+            "Barrel_Temperature_1",
+            "Barrel_Temperature_2",
+            "Barrel_Temperature_3",
+            "Barrel_Temperature_4",
+            "Barrel_Temperature_5",
+            "Barrel_Temperature_6",
+            "Hopper_Temperature",
+            "Mold_Temperature_3",
+            "Mold_Temperature_4"
+        ],
+        "raw_categorical_cols": {
+            "EQUIP_NAME": [
+                "650톤-우진2호기"
+            ],
+            "PART_NAME": [
+                "CN7 W/S SIDE MLD'G LH",
+                "CN7 W/S SIDE MLD'G RH",
+                "RG3 MOLD'G W/SHLD, LH",
+                "RG3 MOLD'G W/SHLD, RH"
+            ]
+        },
+        "allowed_values": {
+            "EQUIP_NAME": [
+                "650톤-우진2호기"
+            ],
+            "PART_NAME": [
+                "CN7 W/S SIDE MLD'G LH",
+                "CN7 W/S SIDE MLD'G RH",
+                "RG3 MOLD'G W/SHLD, LH",
+                "RG3 MOLD'G W/SHLD, RH"
+            ]
+        },
+        "mappings": {
+            "PART_NAME": {
+                "target_col": "PART_GROUP",
+                "values": {
+                    "CN7 W/S SIDE MLD'G LH": "CN7",
+                    "CN7 W/S SIDE MLD'G RH": "CN7",
+                    "RG3 MOLD'G W/SHLD, LH": "RG3",
+                    "RG3 MOLD'G W/SHLD, RH": "RG3"
+                }
+            }
+        },
+        "model_input_cols": [
+            "Injection_Time",
+            "Filling_Time",
+            "Plasticizing_Time",
+            "Cycle_Time",
+            "Clamp_Close_Time",
+            "Cushion_Position",
+            "Switch_Over_Position",
+            "Plasticizing_Position",
+            "Clamp_Open_Position",
+            "Max_Injection_Speed",
+            "Max_Screw_RPM",
+            "Average_Screw_RPM",
+            "Max_Injection_Pressure",
+            "Max_Switch_Over_Pressure",
+            "Max_Back_Pressure",
+            "Average_Back_Pressure",
+            "Barrel_Temperature_1",
+            "Barrel_Temperature_2",
+            "Barrel_Temperature_3",
+            "Barrel_Temperature_4",
+            "Barrel_Temperature_5",
+            "Barrel_Temperature_6",
+            "Hopper_Temperature",
+            "Mold_Temperature_3",
+            "Mold_Temperature_4",
+            "PART_GROUP"
+        ],
+        "categorical_cols": [
+            "PART_GROUP"
+        ],
+        "numeric_input_cols": [
+            "Injection_Time",
+            "Filling_Time",
+            "Plasticizing_Time",
+            "Cycle_Time",
+            "Clamp_Close_Time",
+            "Cushion_Position",
+            "Switch_Over_Position",
+            "Plasticizing_Position",
+            "Clamp_Open_Position",
+            "Max_Injection_Speed",
+            "Max_Screw_RPM",
+            "Average_Screw_RPM",
+            "Max_Injection_Pressure",
+            "Max_Switch_Over_Pressure",
+            "Max_Back_Pressure",
+            "Average_Back_Pressure",
+            "Barrel_Temperature_1",
+            "Barrel_Temperature_2",
+            "Barrel_Temperature_3",
+            "Barrel_Temperature_4",
+            "Barrel_Temperature_5",
+            "Barrel_Temperature_6",
+            "Hopper_Temperature",
+            "Mold_Temperature_3",
+            "Mold_Temperature_4"
+        ]
+    },
+    "saved_at": "20260529_140021",
+    "sklearn_version": "1.8.0",
+    "model_file_path": "saved_models\\model_files\\rf_model_test1_20260529_140021.pkl"
+}
